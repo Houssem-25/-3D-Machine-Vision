@@ -1,7 +1,18 @@
 import numpy as np
 import cv2
 import open3d as o3d
+import argparse
 import sys, getopt
+
+
+def parse_inputs():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--output_file', type=str, default='out.ply', help='path of the output point cloud file')
+    parser.add_argument('--timer', type=int, default=3, help='number of acquisitions')
+    parser.add_argument('--device', type=int, default=0, help='id of the used device')
+
+    return parser.parse_args()
+
 
 class AzureKinect:
     """
@@ -29,39 +40,21 @@ class Create_point_cloud():
     """
     Class contain functions to generate and save point clouds
     """
-    def __init__(self):
-        self.count=0
-        self.timer=3
-        self.outputfile=''
+    def __init__(self, parameters):
+        self.count = 0
+        self.timer = parameters.timer
+        self.outputfile = parameters.output_file
         self.cam = AzureKinect()
         self.cam.start()
 
 
-    def create_point_cloud(self, argv):
+    def create_point_cloud(self):
         """
         this function generate a ply file containing point clouds
 
         """
-        ## parsing command line arguments
-        try:
-            opts, args = getopt.getopt(argv, "pointcloud:o:t:d:", ["ofile=", "timer=", "device="])
-        except getopt.GetoptError:
-            print('python save_pointcloud.py -o <outputfile> -t <timer> -d <device>')
-            sys.exit(2)
-        for opt, arg in opts:
-            if opt == '-h':
-                print('test.py -o <outputfile> -t <timer> -d <device>')
-                sys.exit()
-            elif opt in ("-o", "--output_file"):
-                self.outputfile = arg
-            elif opt in ("-t", "--timer"):
-                self.timer = int(arg)
-            elif opt in ("-d", "--device"):
-                self.device = arg
-
-
-        while self.count<self.timer:
-            self.count+=1
+        while self.count < self.timer:
+            self.count += 1
             color_frame, depth_frame = self.cam.frames()
 
             depth_image=(depth_frame*1000).astype(np.uint16)
@@ -104,5 +97,6 @@ class Create_point_cloud():
 
 if __name__=="__main__":
     # create object of point cloud class
-    pc=Create_point_cloud()
-    pc.create_point_cloud(sys.argv[1:])
+    parameters = parse_inputs()
+    pc=Create_point_cloud(parameters)
+    pc.create_point_cloud()
