@@ -3,13 +3,14 @@ The companion github repository of 3D machine vision course (Polytech côte d'az
 
 ## Install Azure kinect SDK
 ``` 
-sudo apt install curl git 
 curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 sudo apt-add-repository https://packages.microsoft.com/ubuntu/18.04/prod
-sudo apt-get update 
-
-sudo apt install libk4a1.4*
-sudo apt install k4a-tools
+curl -sSL https://packages.microsoft.com/config/ubuntu/18.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft-prod.list
+curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+sudo apt-get update
+sudo apt install libk4a1.3-dev
+sudo apt install libk4abt1.0-dev
+sudo apt install k4a-tools=1.3.0
 sudo cp 99-k4a.rules /etc/udev/rules.d/
 ```
 ## Test kinect 
@@ -53,8 +54,6 @@ roslaunch azure_kinect_ros_driver driver.launch
 rosrun rviz rviz
 ```
 add PointCloud2 and chose the right topic and modify the topic to display the point cloud
-
-
 
 ---
 This Github repository is part of the 3D Machine Vision Course Practical Software.
