@@ -39,11 +39,12 @@ def transform_pointcloud(pointcloud, pose_T):
     ## your code below
     return pointcloud
 
-def filter_pointcloud(pointcloud, axis, distance):
+def filter_pointcloud(pointcloud, distance, axis=2):
     """
     filter pointcloud based on distance
     :param pointcloud: open3d pointcloud object
     :param distance: distance in meter
+    :param axis: axis to be filtered
     :return: open3d pointcloud object
     """
     # TODO
@@ -104,7 +105,9 @@ class Create_point_cloud():
         o3d.io.write_point_cloud(self.output_file, pcd)
 
         # TODO : define properly the twist vector
-        transform = SE3_exp([0, 0, 0], [0, 0, 0])
+        linear_velocity = np.zeros([1, 3])
+        angular_velocity = np.zeros([1, 3])
+        transform = SE3_exp(linear_velocity, angular_velocity)
         pcd_trasnformed = transform_pointcloud(copy.copy(pcd), transform)
         new_filename = self.output_file.split(".")[0] + "_transformed." + self.output_file.split(".")[1]
         o3d.io.write_point_cloud(new_filename, pcd_trasnformed)
