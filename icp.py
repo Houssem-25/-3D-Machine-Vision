@@ -42,12 +42,11 @@ def log(text):
 
 def estimate_rigid_body_transformation(P_ref, P_current):
     residual = P_current[:, :3] - P_ref[:, :3]
-    J = np.vstack([np.array([      [1, 0, 0,          0          , P_current[i,2]   , -P_current[i,1] ],
-                                   [0, 1, 0, -P_current[i,2] ,           0          ,  P_current[i,0] ],
-                                   [0, 0, 1,  P_current[i,1] , -P_current[i,0]  ,     0               ]]) for i in range(len(residual))])
+    # TODO Write the expression of the Jacobian matrix
+    J = np.vstack([...]) for i in range(len(residual))])
     # TODO Calculate the inverse
-    J_pesudo =
-    delta_x = -J_pesudo @ residual.flatten()
+    J_pseudo =
+    delta_x = -J_pseudo @ residual.flatten()
     dT = SE3_exp(delta_x[0:3], delta_x[3:6])
     return dT, delta_x, residual
 
