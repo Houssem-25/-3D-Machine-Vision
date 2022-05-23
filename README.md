@@ -55,6 +55,15 @@ rosrun rviz rviz
 ```
 add PointCloud2 and chose the right topic and modify the topic to display the point cloud
 
+## Anaconda Installation
+Download and install Anaconda using the following link: https://www.anaconda.com/products/distribution#Downloads
+
+## Virtual environment creation and activation 
+```
+conda create --name session2_env python=3.8
+conda activate session2_env
+pip install -r requirements.txt
+```
 ---
 This Github repository is part of the 3D Machine Vision Course Practical Software.
 
