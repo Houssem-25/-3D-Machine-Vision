@@ -12,7 +12,7 @@ np.random.seed(1)
 dataset_handler = #
 
 # Initialize trajectory and the initial pose
-trajectory = np.zeros((3, dataset_handler.num_frames)
+trajectory = np.zeros((3, dataset_handler.num_frames))
 robot_pose = np.eye(4)
 for i in range(dataset_handler.num_frames-1):
     """
