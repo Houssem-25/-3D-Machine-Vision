@@ -1,16 +1,15 @@
 # 3D-machine-vision
-The companion github repository of 3D machine vision course (Polytech côte d'azure University, France)
+The companion github repository of 3D machine vision course (Polytech Nice Sophia University, France)
 
 ## Install Azure kinect SDK
 ``` 
+sudo apt install curl git 
 curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 sudo apt-add-repository https://packages.microsoft.com/ubuntu/18.04/prod
-curl -sSL https://packages.microsoft.com/config/ubuntu/18.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft-prod.list
-curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-sudo apt-get update
-sudo apt install libk4a1.3-dev
-sudo apt install libk4abt1.0-dev
-sudo apt install k4a-tools=1.3.0
+sudo apt-get update 
+
+sudo apt install libk4a1.4*
+sudo apt install k4a-tools
 sudo cp 99-k4a.rules /etc/udev/rules.d/
 ```
 ## Test kinect 
@@ -55,21 +54,14 @@ rosrun rviz rviz
 ```
 add PointCloud2 and chose the right topic and modify the topic to display the point cloud
 
-## Anaconda Installation
-Download and install Anaconda using the following link: https://www.anaconda.com/products/distribution#Downloads
 
-## Virtual environment creation and activation 
-```
-conda create --name session2_env python=3.8
-conda activate session2_env
-pip install -r requirements.txt
-```
+
 ---
 This Github repository is part of the 3D Machine Vision Course Practical Software.
 
-Version 1.1.0
+Version 1.0.0
 
-Authors: Houssem Boulahbal, Yacine Ahmine, Arnab Dey, Andrew Comport
+Authors: Arnab Dey, Houssem Bouhlabal, Andrew Comport
 
 Contact: Andrew.Comport@cnrs.fr
 
